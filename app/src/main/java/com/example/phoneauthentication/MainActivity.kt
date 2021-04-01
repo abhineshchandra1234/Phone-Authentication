@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun verifyOtp() {
-        var otp= etEnterOtp.text.toString()
+        var otp= etEnterOtp.text.toString().trim()
         if(!otp.isEmpty()){
             val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
                 storedVerificationId.toString(), otp)
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        var number=etEnterNo.text.toString()
+        var number=etEnterNo.text.toString().trim()
 
         if(!number.isEmpty()){
             number="+91"+number
