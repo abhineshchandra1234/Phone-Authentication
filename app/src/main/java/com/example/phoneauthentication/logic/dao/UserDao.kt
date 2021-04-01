@@ -13,6 +13,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(user: User)
 
-    @Query("select * from user_table")
+    @Query("SELECT * FROM user_table")
     fun getUserDetails(): LiveData<List<User>>
 }

@@ -8,11 +8,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import com.example.phoneauthentication.databinding.ActivityHomeBinding
+import com.example.phoneauthentication.databinding.ActivityMainBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -20,10 +21,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var storedVerificationId:String
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         auth=FirebaseAuth.getInstance()
         var currentUser = auth.currentUser
@@ -32,11 +35,11 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        btnSendOtp.setOnClickListener {
+        binding.btnSendOtp.setOnClickListener {
             login()
         }
 
-        btnVerifyOtp.setOnClickListener {
+        binding.btnVerifyOtp.setOnClickListener {
             verifyOtp()
         }
 
@@ -69,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun verifyOtp() {
-        var otp= etEnterOtp.text.toString().trim()
+        var otp= binding.etEnterOtp.text.toString().trim()
         if(!otp.isEmpty()){
             val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
                 storedVerificationId.toString(), otp)
@@ -80,7 +83,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        var number=etEnterNo.text.toString().trim()
+        var number=binding.etEnterNo.text.toString().trim()
 
         if(!number.isEmpty()){
             number="+91"+number
