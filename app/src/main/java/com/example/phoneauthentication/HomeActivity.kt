@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
         auth=FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
-            Log.d("TAG", "user phone no is ${auth.currentUser.phoneNumber.toString()}")
+            Log.d("TAG", "user phone no is ${auth.currentUser?.phoneNumber.toString()}")
             userNumber = auth.currentUser?.phoneNumber.toString()
         }
         binding.btnLogOut.setOnClickListener {
